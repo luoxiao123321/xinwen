@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		span{
+			margin-left: 15px;
+		}
+	</style>
+	<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.but1').click(function(){
+				var but1=$(this).val()
+				console.log(but1)
+				$.ajax({
+				url:'http://localhost:3000/item/list',
+				type:'post',
+				data:'uid:but1',
+				dataType:'json',
+				success:function(e){
+					var a=''
+					for(var i in e){
+						if(but1==e[i].uid){
+							a+=('<p>'+'<span>'+e[i].title+'</span>'+'<span>'+e[i].name+'</span>'+'<span>'+e[i].uid+'</span>'+'</p>')
+						}
+						
+					}
+					$('div').html(a)
+				}
+			})
+			})
+			
+//			$.ajax({
+//				url:'http://localhost:3000/item/list',
+//				type:'post',
+//				dataType:'json',
+//				success:function(e){
+//					for(var i in e){
+//						$('body').append('<p>'+'<span>'+e[i].title+'</span>'+'<span>'+e[i].name+'</span>'+'<span>'+e[i].uid+'</span>'+'</p>')
+//					}
+//				}
+//			})
+		})
+	</script>
+</head>
+<body>
+	<button value="0" class="but1">0</button>
+	<button value="1" class="but1">1</button>
+	<div></div>
+</body>
+</html>
